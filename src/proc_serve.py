@@ -36,7 +36,8 @@ def mem_info():
 
 @app.route('/uptime')
 def uptime():
-    pass
+    info = get_info('uptime')[0].split()
+    return jsonify({"seconds_up": info[0], "seconds_idle": info[1]})
 
 
 if __name__ == '__main__':
