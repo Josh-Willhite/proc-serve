@@ -91,6 +91,21 @@ Provide simple interface to allow external monitoring of infrastructure.
 
 ## Installation
 
+1. Setup virtualenv: ```$ virtualenv -p /usr/bin/python3 proc-serve-env```
+2. Activate virtualenv: ```$ source proc-serve-env/bin/activate```
+3. Clone repo: ```$ git clone https://github.com/Josh-Willhite/proc-serve.git```
+4. Enter dir: ```$ cd proc-serve```
+5. Install: ```$ python setup.py install```
+6. Run:
+```
+$ python src/proc_serve.py &
+$ curl localhost:1404/uptime
+127.0.0.1 - - [26/Feb/2017 21:27:34] "GET /uptime HTTP/1.1" 200 -
+{
+  "seconds_idle": "2390.57", 
+    "seconds_up": "2448.36"
+}
+```
 
 ## API Reference
 
@@ -104,6 +119,21 @@ Provide simple interface to allow external monitoring of infrastructure.
 
 ## Tests
 
+Run tests as follows:
+```
+$ python3 -m pytest -v test_proc_serve.py
+=============================== test session starts ================================
+platform linux -- Python 3.5.2, pytest-3.0.6, py-1.4.32, pluggy-0.4.0 -- /usr/bin/python3
+cachedir: ../.cache
+rootdir: /home/josh/repos/proc-serve, inifile:
+plugins: mock-1.5.0
+collected 1 items
+
+test_proc_serve.py::test_proc_to_dict PASSED
+
+============================= 1 passed in 0.22 seconds =============================
+$
+```
 
 ## License
 
