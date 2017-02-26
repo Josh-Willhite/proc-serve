@@ -107,7 +107,6 @@ $ curl localhost:1404/uptime
 }
 ```
 
-....
 ## API Reference
 
 - /cpuinfo (GET):
@@ -120,6 +119,21 @@ $ curl localhost:1404/uptime
 
 ## Tests
 
+Run tests as follows:
+```
+$ python3 -m pytest -v test_proc_serve.py
+=============================== test session starts ================================
+platform linux -- Python 3.5.2, pytest-3.0.6, py-1.4.32, pluggy-0.4.0 -- /usr/bin/python3
+cachedir: ../.cache
+rootdir: /home/josh/repos/proc-serve, inifile:
+plugins: mock-1.5.0
+collected 1 items
+
+test_proc_serve.py::test_proc_to_dict PASSED
+
+============================= 1 passed in 0.22 seconds =============================
+$
+```
 
 ## License
 
