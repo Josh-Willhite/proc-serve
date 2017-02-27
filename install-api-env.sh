@@ -24,3 +24,31 @@ chmod 755 src/proc_serve.py
 
 #add link to executable
 ln -sf /opt/proc-serve/src/proc_serve.py /usr/local/bin/procserve
+
+#daemonize server using upstart job
+cat > /etc/init/procserve.conf << EOF
+description "proc-serve server"
+author      "Josh Willhite"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+script
+
+    echo $$ > /var/run/procserve.pid
+    exec su -u $proc_serve_user procserve >> /var/log/$log_file
+
+end script
+
+pre-start script
+    echo "[`date`] procserve Starting" >> /var/log/$log_file
+end script
+
+pre-stop script
+    rm /var/run/procserve.pid
+    echo "[`date`] procserve Stopping" >> /var/log/$log_file
+end script
+EOF
+
+#start service
+service procserve start
