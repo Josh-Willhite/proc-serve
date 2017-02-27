@@ -21,3 +21,6 @@ git clone https://github.com/Josh-Willhite/proc-serve.git
 cd ${install_dir}/proc-serve
 python3 setup.py install
 chmod 755 src/proc_serve.py
+
+#add link to executable
+ln -sf /opt/proc-serve/src/proc_serve.py /usr/local/bin/procserve
