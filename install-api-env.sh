@@ -2,6 +2,7 @@
 dependencies=(git python3 python3-dev python3-setuptools)
 proc_serve_user="procserve"
 install_dir="/opt"
+log_file="procserver.log"
 
 #Update package repos and install dependencies
 apt-get update
@@ -24,6 +25,10 @@ chmod 755 src/proc_serve.py
 
 #add link to executable
 ln -sf /opt/proc-serve/src/proc_serve.py /usr/local/bin/procserve
+
+#create log file and set ownership
+touch /var/log/$log_file
+chown $proc_serve_user:$proc_serve_user /var/log/$log_file
 
 #daemonize server using upstart job
 cat > /etc/init/procserve.conf << EOF
