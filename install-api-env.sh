@@ -41,19 +41,23 @@ stop on shutdown
 script
 
     echo $$ > /var/run/procserve.pid
-    exec su -u $proc_serve_user procserve >> /var/log/$log_file
+    exec sudo -u $proc_serve_user procserve >> /var/log/$log_file
 
 end script
 
 pre-start script
-    echo "[`date`] procserve Starting" >> /var/log/$log_file
+    echo "[\$(date)] procserve Starting" >> /var/log/$log_file
 end script
 
 pre-stop script
     rm /var/run/procserve.pid
-    echo "[`date`] procserve Stopping" >> /var/log/$log_file
+    echo "[\$(date)] procserve Stopping" >> /var/log/$log_file
 end script
 EOF
 
 #start service
 service procserve start
+
+#get external vagrant IP
+IP=$(ifconfig | grep -A1 eth1 | awk '/inet/{print $2}' | cut -d':' -f2)
+echo "Service is listening on ${IP}:1404"
